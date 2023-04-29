@@ -1,0 +1,65 @@
+{% macro generate_single_item(item) %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ item.url }}" type="{{ item|get_type }}">{{ item.title }}</a>
+            </li>
+{% endmacro %}
+
+{% macro generate_item_with_children(item) %}
+            <li class="nav-item dropdown">
+			    <a class="nav-link dropdown-toggle" href="#" id="{{ item.hash }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ item.title }}</a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="{{ item.hash }}">
+                    <a type="{{ item|get_type }}" class="dropdown-item" href="{{ item.url }}">{{ item.title }}</a>
+    {% for child in item.children %}
+        {% if child|get_type == 'Tearoff' %}
+            {% continue %}
+        {% endif %}
+        {% if child|get_type == 'Feed' %}
+            {% continue %}
+        {% endif %}
+					<a type="{{ child|get_type }}" class="dropdown-item" href="{{ child.url }}">{{ child.title }}</a>
+	{% endfor %}
+		        </div>
+    		</li>
+{% endmacro %}
+
+{% macro generate_navbar(content_items) %}
+    {% for item in all_content %}
+        {% if item|get_type == 'Feed' %}
+            {% continue %}
+        {% endif %}
+
+        {% if item|get_type == 'Tearoff' %}
+            {% continue %}
+        {% endif %}
+
+        {% if item.children|length == 0 %}
+            {{ generate_single_item(item) }}
+        {% else %}
+            {{ generate_item_with_children(item) }}
+        {% endif %}
+
+    {% endfor %}
+{% endmacro %}
+
+
+<!-- start navbar -->
+		<nav class="navbar navbar-expand-md custom-navbar navbar-dark fixed-top bg-dark">
+
+			<a href="/" class="navbar-brand">
+				<img src="../../{{ config.site.logo_path }}" height="64" alt="DHLP">
+				<span class="project-name pl-3">{{ config.site.title }}</span>
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+				<ul class="navbar-nav ml-auto">
+					{{ generate_navbar(all_content) }}
+				</ul>
+
+			</div>
+		</nav>
+<!-- end navbar -->

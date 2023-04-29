@@ -1,0 +1,42 @@
+{% include 'header.tmpl' %}
+{% include 'navbar.tmpl' %}
+
+<!-- start content view for product -->
+		<div class="content">
+			<main role="main">
+				<!-- Main jumbotron for a primary marketing message or call to action -->
+				{% if this_content.type == 'primary' %}
+				<div class="jumbotron">
+				{% else %}
+				<div class="jumbotron secondary-jumbotron">
+				{% endif %}
+					<div class="container">
+						<h1 class="display-3">{{ this_content.title }}</h1>
+						<p>{{ this_content.description }}</p>
+						<p><a class="btn btn-primary btn-lg" href="{{ this_content.link_url }}" role="button">{{ this_content.link_url_description }}</a></p>
+					</div>
+				</div>
+
+				<div class="container">
+					<hr>
+
+        			<div class="row">
+
+                        {% for tearoff in tearoffs %}
+						<div class="col-md-3">
+							<h2>{{ tearoff.title }}</h2>
+							<p>{{ tearoff.content }}</p>
+							<p><a class="btn btn-secondary" href="{{ tearoff.link_url }}" role="button">{{ tearoff.link_title }}</a></p>
+						</div>
+                        {% endfor %}
+
+					</div>
+
+					<hr>
+
+				</div>
+			</main>
+		</div>
+<!-- end content view for product -->
+
+{% include 'footer.tmpl' %}

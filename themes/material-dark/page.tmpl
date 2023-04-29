@@ -1,0 +1,49 @@
+{% include 'header.tmpl' %}
+{% include 'navbar.tmpl' %}
+
+<!-- start content view for page -->
+        <div class="content">
+			<main role="main">
+    			<div class="jumbotron">
+        		    <div class="container">
+		    	        <h1 class="display-4 text-center title-text">{{ this_content.title }}</h1>
+			        </div>
+                </div>
+
+				<div class="p-3 mb-5 rounded">
+                    <div class="media pt-3">
+                        <div class="media-body pb-3 mb-0 lh-125 border-bottom cuscol">
+                            <div class="list-group">
+                            <div class="list-group-item list-group-item-action">
+                                <div class="w-100">
+                                    {{ this_content.html_content }}
+                                </div>
+                            </div>
+                            <p></p>
+
+                                {% for entry in sorted_feeds %}
+                                    <div class="list-group-item list-group-item-action">
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <div class="d-flex flex-column">
+                                                <h5 class="mb-1">
+                                                    <a href="{{ entry.parent_feed.site_url }}">{{ entry.parent_feed.title }}</a>:
+                                                    <a href="{{ entry.url }}">{{ entry.title }}</a>
+                                                </h5>
+                                                {{ entry.content|safe }}
+                                            </div>
+                                            <div class="d-flex flex-column align-items-end">
+                                                <div class="feed_date">{{ entry.date }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+			</main>
+		</div>
+<!-- end page view -->
+
+{% include 'footer.tmpl' %}
