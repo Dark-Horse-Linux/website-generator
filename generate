@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from src.Config import Config
 from src.ContentLoader import ContentLoader
 from src.SiteGenerator import SiteGenerator
