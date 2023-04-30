@@ -13,6 +13,7 @@ class Site:
         self.logo_path = self._site_parser.get('main', 'logo')
         self.title = self._site_parser.get( 'main', 'title')
         self.landing = self._site_parser.get( 'main', 'landing')
+        self.owner = self._site_parser.get('main', 'owner')
 
 
 # paths can be provided as relative paths or absolute paths
