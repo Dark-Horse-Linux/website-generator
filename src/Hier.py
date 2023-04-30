@@ -37,7 +37,8 @@ class Hier:
 
         for unique_name, children in tree.items():
             item_instance = self._bottom_up.get_item_by_uname(unique_name)
-            item_instance.children = self.build_instance_tree( children )
+            sorted_children = self.build_instance_tree(children)
+            item_instance.children = sorted(sorted_children, key=lambda child: child.title)
             instance_list.append(item_instance)
         return instance_list
 
