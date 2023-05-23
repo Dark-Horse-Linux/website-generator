@@ -137,7 +137,7 @@ hr {
   }
 }
 
-@media (max-width: 985px) {
+@media (max-width: 990px) {
 .col-md-3 {
     	max-width: 100% !important;
 	min-width: 100% !important;
